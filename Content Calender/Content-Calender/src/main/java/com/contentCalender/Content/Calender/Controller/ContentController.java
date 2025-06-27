@@ -1,6 +1,7 @@
 package com.contentCalender.Content.Calender.Controller;
 
 import com.contentCalender.Content.Calender.Model.Content;
+import com.contentCalender.Content.Calender.Model.Status;
 import com.contentCalender.Content.Calender.Repository.ContentCollectionRepository;
 import com.contentCalender.Content.Calender.Repository.ContentRepository;
 import jakarta.validation.Valid;
@@ -52,6 +53,15 @@ public class ContentController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id){
         repository.deleteById(id);
+    }
+    @GetMapping("/filter/{keyword}")
+    public List<Content> findByTitle(@PathVariable String keyword){
+        return repository.findAllByTitleContains(keyword);
+    }
+
+    @GetMapping("/filter/status/{status}")
+    public List<Content> findByStatus(@PathVariable Status status){
+        return repository.listyStatus(status);
     }
 }
 
